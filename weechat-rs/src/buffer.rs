@@ -323,17 +323,17 @@ impl Buffer {
     /// Display a message on the buffer.
     pub fn print(&self, message: &str) {
         let weechat = Weechat::from_ptr(self.weechat);
-        let printf_date_tags = weechat.get().printf_date_tags.unwrap();
+        let printf_datetime_tags = weechat.get().printf_datetime_tags.unwrap();
 
         let fmt_str = LossyCString::new("%s");
         let c_message = LossyCString::new(message);
 
         unsafe {
-            printf_date_tags(
+            printf_datetime_tags(
                 self.ptr,
                 0,
+                0,
                 ptr::null(),
-                fmt_str.as_ptr(),
                 c_message.as_ptr(),
             )
         }
@@ -342,18 +342,18 @@ impl Buffer {
     /// Display a message on the buffer with attached date and tags
     pub fn print_tags_dated(&self, date: i64, tags: &str, message: &str) {
         let weechat = Weechat::from_ptr(self.weechat);
-        let printf_date_tags = weechat.get().printf_date_tags.unwrap();
+        let printf_datetime_tags = weechat.get().printf_datetime_tags.unwrap();
 
         let fmt_str = LossyCString::new("%s");
         let tags = LossyCString::new(tags);
         let message = LossyCString::new(message);
 
         unsafe {
-            printf_date_tags(
+            printf_datetime_tags(
                 self.ptr,
                 date,
+                0,
                 tags.as_ptr(),
-                fmt_str.as_ptr(),
                 message.as_ptr(),
             )
         }

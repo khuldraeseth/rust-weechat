@@ -121,17 +121,17 @@ impl Weechat {
 
     /// Display a message on the core weechat buffer.
     pub fn print(&self, msg: &str) {
-        let printf_date_tags = self.get().printf_date_tags.unwrap();
+        let printf_datetime_tags = self.get().printf_datetime_tags.unwrap();
 
         let fmt = LossyCString::new("%s");
         let msg = LossyCString::new(msg);
 
         unsafe {
-            printf_date_tags(
+            printf_datetime_tags(
                 ptr::null_mut(),
                 0,
+                0,
                 ptr::null(),
-                fmt.as_ptr(),
                 msg.as_ptr(),
             );
         }

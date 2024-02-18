@@ -143,6 +143,7 @@ impl InnerInfolist {
                                 Weechat::color("chat")
                             ),
                         ),
+                        InfolistVariable::Pointer(_) => todo!(),
                     };
 
                     buffer.print_date_tags(
